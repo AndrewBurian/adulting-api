@@ -14,6 +14,7 @@ type ActivityHandler struct {
 	logger *logrus.Entry
 }
 
+// ActivitiesResponse is the response for fetching all activites
 type ActivitiesResponse struct {
 	Debits  []*data.Activity `json:"debits"`
 	Credits []*data.Activity `json:"credits"`
@@ -24,6 +25,7 @@ func (h *ActivityHandler) Setup(r *powermux.Route) {
 	r.GetFunc(h.GetAll)
 }
 
+// GetAll returns the list of all activities available to the user
 func (h *ActivityHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 
 	log := h.logger

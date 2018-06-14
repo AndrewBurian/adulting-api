@@ -29,12 +29,12 @@ func main() {
 
 	// Setup logging
 	// ------------------------------------------------------------------------
-	if *debug && *quiet {
-		log.Fatal("Can only set one of -q and -v")
-	}
-
 	if _, found := os.LookupEnv("DEBUG"); found {
 		*debug = true
+	}
+
+	if *debug && *quiet {
+		log.Fatal("Can only set one of -q and -v")
 	}
 
 	if *debug {
