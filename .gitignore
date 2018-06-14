@@ -1,4 +1,5 @@
-adulting
+adulting-api
 tmp/
 *.swp
 vendor/
+*.paw

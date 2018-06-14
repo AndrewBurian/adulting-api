@@ -7,7 +7,6 @@ import (
 
 	"github.com/AndrewBurian/adulting-api/data"
 	"github.com/AndrewBurian/powermux"
-	"github.com/go-pg/pg"
 	"github.com/sirupsen/logrus"
 )
 
@@ -24,7 +23,7 @@ type AuthReply struct {
 
 // AuthHandler is the router for handling authentication
 type AuthHandler struct {
-	db     *pg.DB
+	db     data.UserDAL
 	logger *logrus.Entry
 }
 
@@ -53,11 +52,8 @@ func (h *AuthHandler) PasswordAuth(w http.ResponseWriter, r *http.Request) {
 	}
 	log = log.WithField("user", req.Username)
 
-	//err := h.db.Select(&user)
-	user.Password = []byte("$2y$12$jD3veHdFN1uuF7iQ6p5kvOAvjJrCGaH/A1kkWeSenMDxQQXxQeMDm")
-	var err error
-
-	if err == pg.ErrNoRows {
+	err := h.db.GetUser(user)
+	if err == data.ErrNotFound {
 		log.Debug("User not found")
 		http.Error(w, "User Not Found", http.StatusNotFound)
 		return

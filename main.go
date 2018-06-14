@@ -96,7 +96,7 @@ func main() {
 	users.Setup(mux.Route("/user"))
 
 	auth := &AuthHandler{
-		db:     dbConn,
+		db:     data.NewMockUserDal(),
 		logger: log.WithField("component", "auth"),
 	}
 	auth.Setup(mux.Route("/auth"))

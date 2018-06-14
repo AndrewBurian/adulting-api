@@ -31,10 +31,6 @@
   name = "github.com/AndrewBurian/mediatype"
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/andrewburian/powermux"
-
-[[constraint]]
   name = "github.com/go-pg/pg"
   version = "6.13.5"
 
