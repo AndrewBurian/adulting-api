@@ -30,6 +30,7 @@ type AuthHandler struct {
 // Setup creates routes for the auth handler
 func (h *AuthHandler) Setup(r *powermux.Route) {
 	r.Route("/password").PostFunc(h.PasswordAuth)
+	r.Route("/logout").PostFunc(h.Logout)
 }
 
 // PasswordAuth processes a password attempt
@@ -82,4 +83,11 @@ func (h *AuthHandler) PasswordAuth(w http.ResponseWriter, r *http.Request) {
 	if err = WriteResponse(w, r, token); err != nil {
 		log.WithError(err).Error("Unable to send response")
 	}
+}
+
+// Logout invalidates the current access token
+func (h *AuthHandler) Logout(w http.ResponseWriter, r *http.Request) {
+	//TODO
+	http.Error(w, "Work in progress", http.StatusNotImplemented)
+	return
 }

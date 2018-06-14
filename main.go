@@ -32,6 +32,10 @@ func main() {
 		log.Fatal("Can only set one of -q and -v")
 	}
 
+	if _, found := os.LookupEnv("DEBUG"); found {
+		*debug = true
+	}
+
 	if *debug {
 		log.SetLevel(log.DebugLevel)
 	} else if *quiet {
