@@ -5,6 +5,7 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
+	"github.com/andrewburian/adulting-api/data"
 	"github.com/andrewburian/powermux"
 	"github.com/go-pg/pg"
 	"github.com/sirupsen/logrus"
@@ -47,7 +48,7 @@ func (h *AuthHandler) PasswordAuth(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Fetch user password
-	user := &User{
+	user := &data.User{
 		Username: req.Username,
 	}
 	log = log.WithField("user", req.Username)

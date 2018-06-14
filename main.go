@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/andrewburian/adulting-api/data"
 	"github.com/andrewburian/powermux"
 	"github.com/go-pg/pg"
 	log "github.com/sirupsen/logrus"
@@ -99,6 +100,12 @@ func main() {
 		logger: log.WithField("component", "auth"),
 	}
 	auth.Setup(mux.Route("/auth"))
+
+	activity := &ActivityHandler{
+		db:     data.NewMockActivityDal(),
+		logger: log.WithField("component", "activity"),
+	}
+	activity.Setup(mux.Route("/activity"))
 
 	if *debug {
 		fmt.Println(mux)

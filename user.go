@@ -7,13 +7,6 @@ import (
 	"github.com/go-pg/pg"
 )
 
-// User is an application user and all their data
-type User struct {
-	Username string
-	Points   uint
-	Password []byte
-}
-
 // UserHandler is the router for user requests
 type UserHandler struct {
 	db *pg.DB
