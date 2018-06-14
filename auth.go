@@ -5,8 +5,8 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/andrewburian/adulting-api/data"
-	"github.com/andrewburian/powermux"
+	"github.com/AndrewBurian/adulting-api/data"
+	"github.com/AndrewBurian/powermux"
 	"github.com/go-pg/pg"
 	"github.com/sirupsen/logrus"
 )

@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/andrewburian/powermux"
+	"github.com/AndrewBurian/powermux"
 	"github.com/go-pg/pg"
 )
 

@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/andrewburian/adulting-api/data"
-	"github.com/andrewburian/powermux"
+	"github.com/AndrewBurian/adulting-api/data"
+	"github.com/AndrewBurian/powermux"
 	"github.com/sirupsen/logrus"
 )
 

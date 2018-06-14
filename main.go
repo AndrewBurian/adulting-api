@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/andrewburian/adulting-api/data"
-	"github.com/andrewburian/powermux"
+	"github.com/AndrewBurian/adulting-api/data"
+	"github.com/AndrewBurian/powermux"
 	"github.com/go-pg/pg"
 	log "github.com/sirupsen/logrus"
 )

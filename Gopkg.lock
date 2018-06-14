@@ -9,7 +9,7 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/andrewburian/powermux"
+  name = "github.com/AndrewBurian/powermux"
   packages = ["."]
   revision = "593c0f2b2e9f99b4aa366ebaa44323169458724d"
 
@@ -60,6 +60,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ca80cf7fee0c06bc9211d5980fd348de106c444cddd43f88010ffdb08c65f841"
+  inputs-digest = "dca7ce85188519c8cad70ce55b9e20a9f9297e0ec4bff36fb786ac6dbde2f198"
   solver-name = "gps-cdcl"
   solver-version = 1
