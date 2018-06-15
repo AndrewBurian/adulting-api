@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/AndrewBurian/adulting-api/middlewares"
 	"github.com/AndrewBurian/mediatype"
 )
 
@@ -14,7 +15,7 @@ var (
 
 // DecodeJSON reads an arbitrary JSON object from a request
 func DecodeJSON(r *http.Request, obj interface{}) error {
-	content := ContentType(r)
+	content := middlewares.ContentType(r)
 	if content == nil || content.SubType != "json" {
 		return fmt.Errorf("Content Type not JSON")
 	}
@@ -24,7 +25,7 @@ func DecodeJSON(r *http.Request, obj interface{}) error {
 
 // WriteResponse attempts to write the JSON object into the response
 func WriteResponse(w http.ResponseWriter, r *http.Request, obj interface{}) error {
-	if !Accepts(r).SupportsType(jsonType) {
+	if !middlewares.Accepts(r).SupportsType(jsonType) {
 		http.Error(w, "Unsupported response content types", http.StatusNotAcceptable)
 		return fmt.Errorf("Doesn't accept JSON")
 	}

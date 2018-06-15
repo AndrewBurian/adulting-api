@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"github.com/AndrewBurian/adulting-api/data"
+	"github.com/AndrewBurian/adulting-api/middlewares"
 	"github.com/AndrewBurian/powermux"
 	"github.com/go-pg/pg"
 	log "github.com/sirupsen/logrus"
@@ -59,10 +60,20 @@ func main() {
 
 	dbConn := pg.Connect(dbOpts)
 
+	// Mocks
+	// ------------------------------------------------------------------------
+	mockUser := data.NewMockUserDal()
+	mockActivity := data.NewMockActivityDal()
+
 	// Setup Server
 	// ------------------------------------------------------------------------
 	mux := powermux.NewServeMux()
-	mux.MiddlewareFunc("/", ContentTypeDetect)
+	mux.MiddlewareFunc("/", middlewares.ContentTypeDetect)
+
+	authDetect := &middlewares.AuthDetection{
+		DB: mockUser,
+	}
+	mux.Middleware("/", authDetect)
 
 	port, found := os.LookupEnv("PORT")
 	if !found {
@@ -92,17 +103,16 @@ func main() {
 	users := &UserHandler{
 		db: dbConn,
 	}
-
 	users.Setup(mux.Route("/user"))
 
 	auth := &AuthHandler{
-		db:     data.NewMockUserDal(),
+		db:     mockUser,
 		logger: log.WithField("component", "auth"),
 	}
 	auth.Setup(mux.Route("/auth"))
 
 	activity := &ActivityHandler{
-		db:     data.NewMockActivityDal(),
+		db:     mockActivity,
 		logger: log.WithField("component", "activity"),
 	}
 	activity.Setup(mux.Route("/activity"))
