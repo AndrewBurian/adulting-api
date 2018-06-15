@@ -112,8 +112,9 @@ func main() {
 	auth.Setup(mux.Route("/auth"))
 
 	activity := &ActivityHandler{
-		db:     mockActivity,
-		logger: log.WithField("component", "activity"),
+		activityDB: mockActivity,
+		userDB:     mockUser,
+		logger:     log.WithField("component", "activity"),
 	}
 	activity.Setup(mux.Route("/activity"))
 

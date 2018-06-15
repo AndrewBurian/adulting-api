@@ -9,6 +9,7 @@ type Activity struct {
 
 type ActivityDAL interface {
 	GetActivites() ([]*Activity, error)
+	GetActivity(*Activity) error
 }
 
 type mockActivityDal struct {
@@ -42,4 +43,17 @@ func NewMockActivityDal() ActivityDAL {
 
 func (mock *mockActivityDal) GetActivites() ([]*Activity, error) {
 	return mock.all, nil
+}
+
+func (mock *mockActivityDal) GetActivity(a *Activity) error {
+	for _, act := range mock.all {
+		if act.ID == a.ID {
+			a.Description = act.Description
+			a.Name = act.Name
+			a.PointValue = act.PointValue
+			return nil
+		}
+	}
+
+	return ErrNotFound
 }

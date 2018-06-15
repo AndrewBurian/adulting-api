@@ -24,13 +24,14 @@ func DecodeJSON(r *http.Request, obj interface{}) error {
 }
 
 // WriteResponse attempts to write the JSON object into the response
-func WriteResponse(w http.ResponseWriter, r *http.Request, obj interface{}) error {
+func WriteResponse(w http.ResponseWriter, r *http.Request, obj interface{}, code int) error {
 	if !middlewares.Accepts(r).SupportsType(jsonType) {
 		http.Error(w, "Unsupported response content types", http.StatusNotAcceptable)
 		return fmt.Errorf("Doesn't accept JSON")
 	}
 
 	w.Header().Add("Content-Type", jsonType.String())
+	w.WriteHeader(code)
 
 	return json.NewEncoder(w).Encode(obj)
 }

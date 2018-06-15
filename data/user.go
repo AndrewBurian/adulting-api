@@ -4,7 +4,7 @@ package data
 type User struct {
 	ID       string
 	Username string
-	Points   uint
+	Points   int
 	Password []byte
 
 	tokens []string
@@ -14,6 +14,7 @@ type User struct {
 type UserDAL interface {
 	GetUser(*User) error
 	GetUserByToken(string) (*User, error)
+	UpdatePoints(*User) error
 }
 
 type mockUserDal struct {
@@ -57,4 +58,9 @@ func (m *mockUserDal) GetUserByToken(t string) (*User, error) {
 
 	return u, nil
 
+}
+
+func (m *mockUserDal) UpdatePoints(u *User) error {
+	m.u.Points = u.Points
+	return nil
 }

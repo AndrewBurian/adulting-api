@@ -77,7 +77,7 @@ func (h *AuthHandler) PasswordAuth(w http.ResponseWriter, r *http.Request) {
 	token := &AuthReply{
 		Token: "no", //TODO
 	}
-	if err = WriteResponse(w, r, token); err != nil {
+	if err = WriteResponse(w, r, token, http.StatusOK); err != nil {
 		log.WithError(err).Error("Unable to send response")
 	}
 }
