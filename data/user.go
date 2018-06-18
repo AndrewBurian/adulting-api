@@ -2,12 +2,11 @@ package data
 
 // User is an application user and all their data
 type User struct {
-	ID       string
-	Username string
-	Points   int
-	Password []byte
-
-	tokens []string
+	ID       string   `json:"-"`
+	Username string   `json:"username"`
+	Points   int      `json:"points"`
+	Password []byte   `json:"-"`
+	Tokens   []string `json:"-"`
 }
 
 // UserDAL is the Data Access Layer that controls users
@@ -28,7 +27,7 @@ func NewMockUserDal() UserDAL {
 			Username: "admin",
 			Password: []byte("$2y$12$jD3veHdFN1uuF7iQ6p5kvOAvjJrCGaH/A1kkWeSenMDxQQXxQeMDm"),
 			Points:   0,
-			tokens:   []string{"no"},
+			Tokens:   []string{"no"},
 		},
 	}
 }
@@ -40,13 +39,13 @@ func (m *mockUserDal) GetUser(u *User) error {
 
 	u.Password = m.u.Password
 	u.Points = m.u.Points
-	u.tokens = m.u.tokens
+	u.Tokens = m.u.Tokens
 
 	return nil
 }
 
 func (m *mockUserDal) GetUserByToken(t string) (*User, error) {
-	if t != m.u.tokens[0] {
+	if t != m.u.Tokens[0] {
 		return nil, ErrNotFound
 	}
 
